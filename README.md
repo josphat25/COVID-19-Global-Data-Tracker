@@ -1,103 +1,45 @@
-# COVID-19-Global-Data-Tracker
+# 🦠 COVID-19 Global Data Tracker
 
-A data analysis project on COVID-19 global trends — covering cases, deaths, and vaccinations across countries using real-world data.
-
-
-##  1. Data Collection
-
-Dataset Source: [Our World in Data](https://ourworldindata.org/covid-deaths)
-
-# Install libraries if needed
-# !pip install pandas matplotlib seaborn plotly
-
-import pandas as pd
-
-# Load the dataset
-df = pd.read_csv('owid-covid-data.csv')
-df.shape
-
-##  2. Data Exploration
-Explore structure, missing values, and basic features.
-
-# Preview data
-df.head()
-df.columns
-
-# Check for missing values
-df.isnull().sum().sort_values(ascending=False)
-
-##  3. Data Cleaning
-Focus on a few countries and clean missing/incorrect values.
-
-# Convert date column to datetime
-df['date'] = pd.to_datetime(df['date'])
-
-# Select countries of interest
-countries = ['Kenya', 'United States', 'India']
-df_subset = df[df['location'].isin(countries)]
-
-# Drop rows with missing total_cases or total_deaths
-df_subset = df_subset.dropna(subset=['total_cases', 'total_deaths'])
-
-# Optional: Fill other missing values
-df_subset = df_subset.fillna(method='ffill')
-
-
-## 4. Exploratory Data Analysis (EDA)
-Analyze time trends for cases and deaths.
-
-import matplotlib.pyplot as plt
-import seaborn as sns
-
-plt.figure(figsize=(12,6))
-for country in countries:
-    country_data = df_subset[df_subset['location'] == country]
-    plt.plot(country_data['date'], country_data['total_cases'], label=country)
-
-plt.title('Total COVID-19 Cases Over Time')
-plt.xlabel('Date')
-plt.ylabel('Total Cases')
-plt.legend()
-plt.grid(True)
-plt.tight_layout()
-plt.show()
-
-##  5. Vaccination Analysis
-Visualize vaccination progress over time.
-
-plt.figure(figsize=(12,6))
-for country in countries:
-    country_data = df_subset[df_subset['location'] == country]
-    plt.plot(country_data['date'], country_data['total_vaccinations'], label=country)
-
-plt.title('Total COVID-19 Vaccinations Over Time')
-plt.xlabel('Date')
-plt.ylabel('Total Vaccinations')
-plt.legend()
-plt.grid(True)
-plt.tight_layout()
-plt.show()
+This project is a data analysis notebook that explores global COVID-19 trends using real-world data from [Our World in Data](https://ourworldindata.org/covid-deaths). It analyzes key metrics such as total cases, deaths, and vaccinations across multiple countries over time.
 
 ---
 
-## 6. Insights & Conclusions
+## 🎯 Project Objectives
 
-- **Insight 1:** India showed a rapid increase in vaccination from mid-2021.
-- **Insight 2:** The USA had a high death count in early 2021 but managed to flatten the curve post-vaccination.
-- **Insight 3:** Kenya’s data shows slower vaccination uptake but better death recovery rates than expected.
+- Import and clean COVID-19 global dataset
+- Analyze trends in cases, deaths, and vaccinations
+- Compare COVID-19 metrics across selected countries
+- Visualize data using time-series charts and maps
+- Summarize insights in a clear, well-documented report
 
-## ✅ Summary
+---
 
-This notebook explored COVID-19 data trends across countries using real-world datasets. Key steps included:
-- Data loading and cleaning
-- Time-series analysis of cases and deaths
-- Vaccination comparisons
-- Visual storytelling using Python libraries
+## 🧰 Tools & Libraries Used
 
+- Python 3.x
+- Jupyter Notebook
+- pandas
+- matplotlib
+- seaborn
+- plotly (for optional choropleth map)
 
+---
 
+## ▶️ How to Run/View the Project
 
+1. Download the dataset `owid-covid-data.csv` from [Our World in Data](https://ourworldindata.org/covid-deaths) and place it in the same folder as the notebook.
+2. Open `COVID19_Global_Data_Tracker_Template.ipynb` using Jupyter Notebook or VS Code with the Jupyter extension.
+3. Run all cells from start to finish to generate analysis and visualizations.
 
+---
 
+## 📌 Insights & Reflections
 
+- India demonstrated the fastest vaccination rollout among the selected countries.
+- The USA had significantly higher early case and death counts, but improved after vaccination efforts.
+- Kenya showed relatively fewer cases and slower vaccine distribution but managed to stabilize fatality rates.
+- Data visualizations helped uncover trends not easily seen through raw numbers.
 
+---
+
+Feel free to fork or clone the repository and explore more data dimensions like testing rates or age-specific outcomes!
